@@ -53,7 +53,7 @@ export default function (markdown = '') {
 	 * @const textBlocks - array of text blocks.
 	 *
 	 * - trim() to remove leading empty lines or spaces.
-	 * - \n+ to deal with more lines between blocks.
+	 * - `\n\n+`: the `+` to deal with more lines between blocks.
 	 */
 	const textBlocks = markdown.trim().split(/\n\n+/);
 
