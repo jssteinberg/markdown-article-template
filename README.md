@@ -1,20 +1,25 @@
-# A Template Proposal For Markdown Articles
+# A File Template Proposal For Articles in Markdown
 
-A template proposal for readable markdown articles (e.g. **blog posts**), without front-matter. Meta data looks a bit like YAML front-matter, but isn't quite the same. This template uses basic markdown syntax for an article header and its meta data. Readability in text-only and when it's rendered without specific HTML/CSS, for instance at Github, is the goal.
+Readable complete text-only articles!
+
+This is a proposal for a file template for readable text-only, markdown articles (e.g. **blog posts**). It should of course be parseable to HTML as well. Metadata can be added without YAML front matter (YFM) in a more markdowny way. Meta data looks a bit like YFM, but is markdown, simpler and a more natural part of the article. It's all basic markdown.
+
+The goal is a template for a full article in pure markdown that is as readable as possible as text-only and when it's rendered without specific HTML/CSS (for instance at Github). And with a possible output that is fully usable in an application of any kind.
 
 ---
 
-## The Template
+## File example
 
 ```markdown
 # Title
 
 A subtitle or lead paragraph
 
-- list items: of metadata
-- a list of values: becomes, an, array
+- unordered list item: metadata
+- key: single value
+- comma list: value, array
 
-A an abstract of any markdown elements.
+An abstract of any markdown elements.
 
 ---
 
@@ -25,15 +30,33 @@ The content body in *normal* markdown.
 
 Only the title is required.
 
-## Proposal for generated data fields
+JSON output:
 
-- title
-- deck
-- ...metadata (key: value(s))
-- abstract
-- html
+```json
+{
+  "title": "Title",
 
-Abstract and html are the only properties that contains HTML flow elements. Title and deck can contain HTML phrasing elements.
+  "deck": "A subtitle or lead paragraph",
+
+  "unordered list items": "metadata",
+  "key": "single value",
+  "comma list": ["value", "array"],
+
+  "abstract": "<p>An abstract of any markdown elements.</p>",
+
+  "body": "<p>The content body in <em>normal</em> markdown.</p>"
+}
+```
+
+## Output explanation
+
+Generated key names and values:
+
+- title: A string that can contain [HTML phrasing elements][phrasing] (markdown inline markup).
+- deck: A string that can contain [HTML phrasing elements][phrasing].
+- [metadata key]: value(, or values)
+- abstract: A string of HTML from markdown before first horizontal rule, after deck and/or metadata.
+- body: A string of HTML from markdown after first horizontal rule.
 
 ## Simple implementation
 
@@ -63,3 +86,5 @@ npm run dev
 ```
 
 This will start the development server on [localhost:3000](http://localhost:3000). Go to http://localhost:3000/posts.json for the implementation output.
+
+[phrasing]: https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#phrasing_content
