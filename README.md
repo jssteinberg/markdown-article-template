@@ -57,7 +57,7 @@ JSON output:
 
 Generated key names and values:
 
-- title: A string that can contain [HTML phrasing elements][phrasing] (markdown inline markup).
+- title: A string that can contain [HTML phrasing elements][phrasing] (inline HTML).
 - deck: A string that can contain [HTML phrasing elements][phrasing].
 - [metadata key]: value(, or values)
 - abstract: A string of HTML from markdown before first horizontal rule, after deck and/or metadata.
