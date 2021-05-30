@@ -21,14 +21,14 @@ export default function (markdown = '') {
 	const regexHr = /^([-*]\s?)+$/;
 	/** getTitle(string) - (and subtitle). Keep inline html. return {string} - HTML */
 	const getTitle = (text) => getHtmlFromMarkdown(text).replace(/^<[^>]+>(.*)<\/[^>]+>$/, '$1');
-	/** getMetadata(string) - recursive to get all values into one object - return {object} */
-	const getMetadata = (mdItems, generated = false, index = 0) => {
+	/** getHeaderMetadata(string) - recursive to get all values into one object - return {object} */
+	const getHeaderMetadata = (mdItems, generated = false, index = 0) => {
 		if (generated && mdItems[index + 1])
-			return { ...mdItems[index], ...getMetadata(mdItems, true, index + 1) };
+			return { ...mdItems[index], ...getHeaderMetadata(mdItems, true, index + 1) };
 		if (generated)
 			return { ...mdItems[index]}
 
-		return getMetadata(
+		return getHeaderMetadata(
 			mdItems.
 				split('\n').
 				filter(x => x.match(/^\s*[-*]\s*.+:\s*.+/)).
@@ -67,7 +67,7 @@ export default function (markdown = '') {
 				return { deck: getTitle(mdEl) };
 			// Return metadata (can be index 1)
 			if (mdEl.match(regexLiLevel1))
-				return getMetadata(mdEl);
+				return getHeaderMetadata(mdEl);
 
 			return { abstract: getHtmlFromMarkdown(mdEl) };
 		};
