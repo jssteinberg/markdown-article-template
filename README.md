@@ -79,8 +79,7 @@ Uses Rollup as bundler.
 
 ## Running the code in development mode
 
-```bash
-cd my-app
+```sh
 npm install
 npm run dev
 ```
