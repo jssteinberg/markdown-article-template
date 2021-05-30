@@ -60,7 +60,7 @@ Generated key names and values:
 
 ## Simple implementation
 
-See `src/utils/` for a simple Javascript implementation using the marked library and regex of both markdown and HTML strings.
+See [src/utils/](https://github.com/jssteinberg/markdown-article-template/tree/main/src/utils) for a simple Javascript implementation using the marked library and regex of both markdown and HTML strings.
 
 Sapper is used here to test the implementation.
 
