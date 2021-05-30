@@ -15,12 +15,14 @@ const getHtmlFromMarkdown = (markdown, opt) => {
 	return marked(markdown, { renderer }).trim();
 };
 
+/** getInlineHtmlStringFromMarkdownBlock(string). Remove wrapping HTML tag. return {string} - HTML */
+const getInlineHtmlStringFromMarkdownBlock = (text = '') => getHtmlFromMarkdown(text).replace(/^<[^>]+>(.*)<\/[^>]+>$/g, '$1');
+
 /** (string) - return {object} */
 export default function (markdown = '') {
 	const regexLiLevel1 = /^-|\*\s/;
 	const regexHr = /^([-*]\s?)+$/;
-	/** getTitle(string) - (and subtitle). Keep inline html. return {string} - HTML */
-	const getTitle = (text) => getHtmlFromMarkdown(text).replace(/^<[^>]+>(.*)<\/[^>]+>$/, '$1');
+
 	/** getHeaderMetadata(string) - recursive to get all values into one object - return {object} */
 	const getHeaderMetadata = (mdItems, generated = false, index = 0) => {
 		if (generated && mdItems[index + 1])
@@ -61,10 +63,10 @@ export default function (markdown = '') {
 		const getHeaderRetVal = (mdEl, elIndex) => {
 			// Return title
 			if (elIndex === 0)
-				return { title: getTitle(mdEl) };
+				return { title: getInlineHtmlStringFromMarkdownBlock(mdEl) };
 			// Return subtitle, also set it to excerpt dependent on the template style
 			if (elIndex === 1 && !mdEl.match(regexLiLevel1))
-				return { deck: getTitle(mdEl) };
+				return { deck: getInlineHtmlStringFromMarkdownBlock(mdEl) };
 			// Return metadata (can be index 1)
 			if (mdEl.match(regexLiLevel1))
 				return getHeaderMetadata(mdEl);
