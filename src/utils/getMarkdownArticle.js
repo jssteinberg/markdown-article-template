@@ -15,20 +15,22 @@ const getHtmlFromMarkdown = (markdown, opt) => {
 	return marked(markdown, { renderer }).trim();
 };
 
+/** getInlineHtmlStringFromMarkdownBlock(string). Remove wrapping HTML tag. return {string} - HTML */
+const getInlineHtmlStringFromMarkdownBlock = (text = '') => getHtmlFromMarkdown(text).replace(/^<[^>]+>(.*)<\/[^>]+>$/g, '$1');
+
 /** (string) - return {object} */
 export default function (markdown = '') {
 	const regexLiLevel1 = /^-|\*\s/;
 	const regexHr = /^([-*]\s?)+$/;
-	/** getTitle(string) - (and subtitle). Keep inline html. return {string} - HTML */
-	const getTitle = (text) => getHtmlFromMarkdown(text).replace(/^<[^>]+>(.*)<\/[^>]+>$/, '$1');
-	/** getMetadata(string) - recursive to get all values into one object - return {object} */
-	const getMetadata = (mdItems, generated = false, index = 0) => {
+
+	/** getHeaderMetadata(string) - recursive to get all values into one object - return {object} */
+	const getHeaderMetadata = (mdItems, generated = false, index = 0) => {
 		if (generated && mdItems[index + 1])
-			return { ...mdItems[index], ...getMetadata(mdItems, true, index + 1) };
+			return { ...mdItems[index], ...getHeaderMetadata(mdItems, true, index + 1) };
 		if (generated)
 			return { ...mdItems[index]}
 
-		return getMetadata(
+		return getHeaderMetadata(
 			mdItems.
 				split('\n').
 				filter(x => x.match(/^\s*[-*]\s*.+:\s*.+/)).
@@ -53,7 +55,7 @@ export default function (markdown = '') {
 	 * @const textBlocks - array of text blocks.
 	 *
 	 * - trim() to remove leading empty lines or spaces.
-	 * - \n+ to deal with more lines between blocks.
+	 * - `\n\n+`: the `+` to deal with more lines between blocks.
 	 */
 	const textBlocks = markdown.trim().split(/\n\n+/);
 
@@ -61,13 +63,13 @@ export default function (markdown = '') {
 		const getHeaderRetVal = (mdEl, elIndex) => {
 			// Return title
 			if (elIndex === 0)
-				return { title: getTitle(mdEl) };
+				return { title: getInlineHtmlStringFromMarkdownBlock(mdEl) };
 			// Return subtitle, also set it to excerpt dependent on the template style
 			if (elIndex === 1 && !mdEl.match(regexLiLevel1))
-				return { deck: getTitle(mdEl) };
+				return { deck: getInlineHtmlStringFromMarkdownBlock(mdEl) };
 			// Return metadata (can be index 1)
 			if (mdEl.match(regexLiLevel1))
-				return getMetadata(mdEl);
+				return getHeaderMetadata(mdEl);
 
 			return { abstract: getHtmlFromMarkdown(mdEl) };
 		};
