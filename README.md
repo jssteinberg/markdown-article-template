@@ -1,4 +1,4 @@
-# A File Template Proposal For Articles in Markdown
+# Template Proposal For Articles in Markdown
 
 Nicely formatted, readable markdown articles!
 
