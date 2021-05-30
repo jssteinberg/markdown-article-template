@@ -1,6 +1,8 @@
 {
-  "name": "A Template Proposal For Markdown Articles",
-  "description": "A Template Proposal For Markdown Articles",
+  "name": "Template Proposal For Markdown Articles",
+  "description": "Nicely formatted, readable markdown articles!
+
+",
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
