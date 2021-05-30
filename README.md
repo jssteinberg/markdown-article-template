@@ -2,7 +2,7 @@
 
 Nicely formatted, readable markdown articles!
 
-This is a proposal for a file template for readable text-only, markdown articles (e.g. **blog posts**). It should of course be parseable to HTML as well. Metadata can be added without YAML front matter (YFM) in a more markdowny way. Metadata looks a bit like YFM, but is markdown, simpler and a more natural part of the article. It's all basic markdown.
+This is a proposal for a file template for readable text-only, markdown articles (e.g. **blog posts**). It should of course be parseable to HTML as well. Metadata is added without YAML front matter (YFM) in a more markdowny way. It looks a bit like YFM, but is markdown, is simpler, and a more natural part of the article. It's all basic markdown.
 
 The goal is a template for a full article in pure markdown that is as readable as possible as text-only and when it's rendered without specific HTML/CSS (for instance at Github). And with a possible output that is fully usable in an application of any kind.
 
