@@ -1,6 +1,6 @@
 # A File Template Proposal For Articles in Markdown
 
-Nicely formatted, readable text-only articles!
+Nicely formatted, readable markdown articles!
 
 This is a proposal for a file template for readable text-only, markdown articles (e.g. **blog posts**). It should of course be parseable to HTML as well. Metadata can be added without YAML front matter (YFM) in a more markdowny way. Metadata looks a bit like YFM, but is markdown, simpler and a more natural part of the article. It's all basic markdown.
 
