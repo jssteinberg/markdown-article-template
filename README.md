@@ -39,17 +39,29 @@ JSON output:
 
 ```json
 {
-  "title": "Title",
+	"title": {
+		"inlineHtml": "Title",
+		"markdown": "# Title"
+	},
 
-  "deck": "A subtitle or lead paragraph",
+	"deck": {
+		"inlineHtml": "A subtitle or lead paragraph",
+		"markdown": "A subtitle or lead paragraph"
+	},
 
-  "unordered list items": "metadata",
-  "key": "single value",
-  "comma list": ["value", "array"],
+	"unordered list items": "metadata",
+	"key": "single value",
+	"comma list": ["value", "array"],
 
-  "abstract": "<p>An abstract of any markdown elements.</p>",
+	"abstract": {
+		"html": "<p>An abstract of any markdown elements.</p>",
+		"markdown": "An abstract of any markdown elements."
+	},
 
-  "body": "<p>The content body in <em>normal</em> markdown.</p>"
+	"body": {
+		"html": "<p>The content body in <em>normal</em> markdown.</p>",
+		"markdown": "The content body in *normal* markdown."
+	}
 }
 ```
 
