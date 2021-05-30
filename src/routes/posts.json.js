@@ -1,4 +1,4 @@
-import getObjectListFromFolderOfMd from '../utils/getMarkdownPosts.js';
+import getObjectListFromFolderOfMd from '../utils/getMarkdownArticles.js';
 
 export async function get(req, res) {
 	const data = getObjectListFromFolderOfMd('posts/');
