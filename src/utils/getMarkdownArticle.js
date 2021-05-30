@@ -19,7 +19,7 @@ const getHtmlFromMarkdown = (markdown, opt) => {
 const getInlineHtmlStringFromMarkdownBlock = (text = '') => getHtmlFromMarkdown(text).replace(/^<[^>]+>(.*)<\/[^>]+>$/g, '$1');
 
 /** (string) - return {object} */
-export default function (markdown = '') {
+export default function (markdown = '', opt = { longOutput: false }) {
 	const regexLiLevel1 = /^-|\*\s/;
 	const regexHr = /^([-*]\s?)+$/;
 
@@ -59,38 +59,53 @@ export default function (markdown = '') {
 	 */
 	const textBlocks = markdown.trim().split(/\n\n+/);
 
-	const getObjectList = (mdEls, i = 0) => {
+	const getObjectList = (mdEls, longOutput = false, i = 0) => {
+		const getFormattedInlineHtmlVal = (val, source, isLong) => isLong ? { inlineHtml: val, markdown: source } : val;
+		const getFormattedHtmlVal = (val, source, isLong) => isLong ? { html: val, markdown: source } : val;
 		const getHeaderRetVal = (mdEl, elIndex) => {
 			// Return title
 			if (elIndex === 0)
-				return { title: getInlineHtmlStringFromMarkdownBlock(mdEl) };
+				return { title: getFormattedInlineHtmlVal( getInlineHtmlStringFromMarkdownBlock(mdEl), mdEl, longOutput ) };
 			// Return subtitle, also set it to excerpt dependent on the template style
 			if (elIndex === 1 && !mdEl.match(regexLiLevel1))
-				return { deck: getInlineHtmlStringFromMarkdownBlock(mdEl) };
+				return { deck: getFormattedInlineHtmlVal( getInlineHtmlStringFromMarkdownBlock(mdEl), mdEl, longOutput ) };
 			// Return metadata (can be index 1)
 			if (mdEl.match(regexLiLevel1))
 				return getHeaderMetadata(mdEl);
 
-			return { abstract: getHtmlFromMarkdown(mdEl) };
+			return { abstract: getFormattedHtmlVal( getHtmlFromMarkdown(mdEl), mdEl, longOutput ) };
 		};
 
 		// If next el not <hr>, recurse
 		if ( mdEls[i] && !mdEls[i].match(regexHr) ) {
 			const thisHeaderRetVal = getHeaderRetVal(mdEls[i], i);
-			let restOfRetVals = getObjectList(mdEls, i + 1);
+			let restOfRetVals = getObjectList(mdEls, longOutput, i + 1);
 
-			if ('abstract' in thisHeaderRetVal) {
+			if ('abstract' in thisHeaderRetVal && !longOutput) {
 				restOfRetVals['abstract'] = thisHeaderRetVal['abstract'] + (restOfRetVals['abstract'] || '');
+				return { ...restOfRetVals };
+
+			} else if ('abstract' in thisHeaderRetVal) {
+				restOfRetVals['abstract'] = {
+					html: thisHeaderRetVal['abstract'].html + (
+						restOfRetVals['abstract'] && restOfRetVals['abstract'].html ? restOfRetVals['abstract'].html : ''
+					),
+					markdown: thisHeaderRetVal['abstract'].markdown + (
+						restOfRetVals['abstract'] && restOfRetVals['abstract'].markdown ? `\n\n${restOfRetVals['abstract'].markdown}` : ''
+					),
+				};
+
 				return { ...restOfRetVals };
 			}
 
 			return { ...thisHeaderRetVal, ...restOfRetVals };
 
 		} else if ( mdEls[i] ) {
+			const bodyEls = mdEls.slice(i + 1).join('\n\n');
 			// else return body (last val so no need for spread)
-			return { body: getHtmlFromMarkdown(mdEls.slice(i + 1).join('\n\n')) };
+			return { body: getFormattedHtmlVal(getHtmlFromMarkdown(bodyEls), bodyEls, longOutput) };
 		}
 	};
 
-	return getObjectList(textBlocks);
+	return getObjectList(textBlocks, opt.longOutput);
 };

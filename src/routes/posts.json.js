@@ -1,7 +1,7 @@
 import getObjectListFromFolderOfMd from '../utils/getMarkdownArticles.js';
 
 export async function get(req, res) {
-	const data = getObjectListFromFolderOfMd('posts/');
+	const data = getObjectListFromFolderOfMd('posts/', { longOutput: true });
 
 	if (data) {
 		res.writeHead(200, { 'Content-Type': 'application/json' });
