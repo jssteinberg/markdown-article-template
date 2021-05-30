@@ -8,6 +8,10 @@ This is a proposal for a file template for readable text-only, markdown articles
 
 The goal is a template for a full article in pure markdown that is as readable as possible as text-only and when it's rendered without specific HTML/CSS (for instance at Github). And with a possible output that is fully usable in an application of any kind.
 
+*Why not standard YFM/front-matter?* YAML front matter (or separated front matter in general) has become the standard for metadata of markdown articles and blog posts. There are two problems with that:
+
+1. It's not markdown and not a natural part of the text-only markdown content.
+2. If not taken into account when parsing markdown, front-matter is often parsed as a table at the top of the article (at Github for instance), or not parsed correctly. Generating bad, less readable HTML.
 
 ## Markdown file
 
