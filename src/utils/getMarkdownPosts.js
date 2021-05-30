@@ -87,8 +87,8 @@ const getObjectFromMarkdown = (markdown = '') => {
 			return { ...thisHeaderRetVal, ...restOfRetVals };
 
 		} else if ( mdEls[i] ) {
-			// else return html (last val so no need for spread)
-			return { html: getHtmlFromMarkdown(mdEls.slice(i + 1).join('\n\n')) };
+			// else return body (last val so no need for spread)
+			return { body: getHtmlFromMarkdown(mdEls.slice(i + 1).join('\n\n')) };
 		}
 	};
 
