@@ -45,12 +45,12 @@ export default function (markdown = '', opt = { longOutput: false }) {
 	};
 
 	/**
-	 * @const textBlocks - array of text blocks.
+	 * @const markdownBlocks - array of markdown text blocks.
 	 *
 	 * - trim() to remove leading empty lines or spaces.
 	 * - `\n\n+`: the `+` to deal with more lines between blocks.
 	 */
-	const textBlocks = markdown.trim().split(/\n\n+/);
+	const markdownBlocks = markdown.trim().split(/\n\n+/);
 
 	const getObjectList = (mdEls, longOutput = false, i = 0) => {
 		const getFormattedInlineHtmlVal = (val, source, isLong) => isLong ? { inlineHtml: val, markdown: source } : val;
@@ -100,5 +100,5 @@ export default function (markdown = '', opt = { longOutput: false }) {
 		}
 	};
 
-	return getObjectList(textBlocks, opt.longOutput);
+	return getObjectList(markdownBlocks, opt.longOutput);
 };
