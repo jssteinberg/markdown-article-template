@@ -39,6 +39,34 @@ JSON output:
 
 ```json
 {
+  "title": "Title",
+
+  "deck": "A subtitle or lead paragraph",
+
+  "unordered list items": "metadata",
+  "key": "single value",
+  "comma list": ["value", "array"],
+
+  "abstract": "<p>An abstract of any markdown elements.</p>",
+
+  "body": "<p>The content body in <em>normal</em> markdown.</p>"
+}
+```
+
+## Output explanation
+
+Generated key names and values:
+
+- title: A string that can contain [HTML phrasing elements][phrasing] (inline HTML).
+- deck: A string that can contain [HTML phrasing elements][phrasing].
+- [metadata key]: value(, or values)
+- abstract: A string of HTML from markdown before first horizontal rule, after deck and/or metadata.
+- body: A string of HTML from markdown after first horizontal rule.
+
+There's also an outline for a long output version:
+
+```json
+{
 	"title": {
 		"inlineHtml": "Title",
 		"markdown": "# Title"
@@ -64,16 +92,6 @@ JSON output:
 	}
 }
 ```
-
-## Output explanation
-
-Generated key names and values:
-
-- title: A string that can contain [HTML phrasing elements][phrasing] (inline HTML).
-- deck: A string that can contain [HTML phrasing elements][phrasing].
-- [metadata key]: value(, or values)
-- abstract: A string of HTML from markdown before first horizontal rule, after deck and/or metadata.
-- body: A string of HTML from markdown after first horizontal rule.
 
 ## Simple implementation
 
