@@ -1,27 +1,20 @@
-import marked from 'marked';
-
-/** getHtmlFromMarkdown(string) - return string of HTML */
-const getHtmlFromMarkdown = (markdown, opt) => {
-	const renderer = new marked.Renderer();
-
-	marked.setOptions({
-		smartLists: true,
-		smartypants: true,
-	});
-
-	if (opt && opt.inline)
-		return marked.parseInline(markdown, { renderer });
-
-	return marked(markdown, { renderer }).trim();
-};
-
-/** getInlineHtmlStringFromMarkdownBlock(string). Remove wrapping HTML tag. return {string} - HTML */
-const getInlineHtmlStringFromMarkdownBlock = (text = '') => getHtmlFromMarkdown(text).replace(/^<[^>]+>(.*)<\/[^>]+>$/g, '$1');
+import getHtml from './getHtmlFromMarkdown.js';
 
 /** (string) - return {object} */
 export default function (markdown = '', opt = { longOutput: false }) {
 	const regexLiLevel1 = /^-|\*\s/;
 	const regexHr = /^([-*]\s?)+$/;
+
+	const getHtmlFromMarkdown = (markdown) => {
+		if (opt && opt.markedSetOptions)
+			return getHtml(markdown, opt.markedSetOptions);
+
+		return getHtml(markdown);
+	};
+
+	/** getInlineHtmlStringFromMarkdownBlock(string). Remove wrapping HTML tag. return {string} - HTML */
+	const getInlineHtmlStringFromMarkdownBlock = (text = '') =>
+		getHtmlFromMarkdown(text).replace(/^<[^>]+>(.*)<\/[^>]+>$/g, '$1');
 
 	/** getHeaderMetadata(string) - recursive to get all values into one object - return {object} */
 	const getHeaderMetadata = (mdItems, generated = false, index = 0) => {
