@@ -1,1 +1,1 @@
-- v. 0.0.2: added long output
+- v. 0.0.2: added long output option
