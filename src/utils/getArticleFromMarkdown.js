@@ -95,7 +95,7 @@ export default function (markdown = '', opt = { longOutput: false }) {
 
 		} else if ( mdEls[i] ) {
 			const bodyEls = mdEls.slice(i + 1).join('\n\n');
-			// else return body (last val so no need for spread)
+			// Else return body (last val so no need for spread)
 			return { body: getFormattedHtmlVal(getHtmlFromMarkdown(bodyEls), bodyEls, longOutput) };
 		}
 	};

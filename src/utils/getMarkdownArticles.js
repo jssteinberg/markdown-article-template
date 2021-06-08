@@ -1,18 +1,18 @@
 import fs from 'fs';
 import path from 'path';
-import getObjectFromMarkdown from './getMarkdownArticle.js';
+import getObjectFromMarkdown from './getArticleFromMarkdown.js';
 
-/** getObjectListFromMarkdownFiles(string, string, [number=0]) - return [] */
+/** getObjectListFromMarkdownFiles(string, [], {}, [number=0]) - return [] */
 const getObjectListFromMarkdownFiles = (folder, files, opt, index = 0) => {
 	const rawFile = fs.readFileSync(path.resolve(folder, files[index]), 'utf8');
-	const res = [getObjectFromMarkdown(rawFile, opt)];
+	const res = [{'file': files[index], ...getObjectFromMarkdown(rawFile, opt)}];
 
 	// return if no more files, else iterate recursively
 	if (typeof files[index + 1] === 'undefined') return res;
 	else return res.concat(getObjectListFromMarkdownFiles(folder, files, opt, (index + 1)));
 };
 
-/** (string) - return [] */
+/** (string, [{longOutput: boolean}]) - return [] */
 export default function (folder, opt = { longOutput: false }) {
 	try {
 		// get all *.md files
