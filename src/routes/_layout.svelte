@@ -22,14 +22,102 @@
 	@import 'floor-typography-css/src/headings-margin.css';
 	@import 'floor-typography-css/src/classes-sr.css';
 
-	body {
+	:root {
 		--space: calc(1rem * (1 + var(--added-lead)));
-		--font-system: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+		--reading-width: 45rem;
+		--menu-width: 250px;
 
+		--font-system: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+		--h-font: var(--font-system);
+
+		--bg-h: 0;
+		--fg-h: 0;
+		--bg-l: 100%;
+		--fg-l: 0%;
+		--code-bg: hsl(var(--bg-h),5%,calc(var(--bg-l) - 5%));
+
+		font-size: 1.1em;
+		background: hsl(var(--bg-h),0%,var(--bg-l));
+	}
+
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--bg-l: 10%;
+			--fg-l: 100%;
+		}
+	}
+
+	body {
 		max-width: 50em;
 		margin: var(--space, 1em) auto;
 		padding: 0 1ch;
+
 		font-family: var(--font-system);
+		color: hsla(var(--fg-h),0%,var(--fg-l),87.5%);
+	}
+
+	a {
+		color: inherit;
+	}
+
+	@media (min-width: 600px) {
+		h1 {
+			hyphens: manual;
+		}
+	}
+
+	/** Lead p */
+
+	h1 + * {
+		--lead-line-height: 1.3;
+		font-size: calc(
+			(1em * (1 + var(--added-lead, .6)))
+			/
+			var(--lead-line-height)
+		);
+		line-height: var(--lead-line-height);
+	}
+
+	/** Code blocks */
+
+	pre {
+		--space-pre: calc(var(--space) * .75);
+		--radius-pre: .9em;
+		width: 100%;
+		max-width: unset;
+		overflow: auto;
+		white-space: pre;
+		box-shadow: 0 1px 1px 1px hsla(var(--bg-h),0%,calc(var(--bg-l) - 40%),40%);
+		border-radius: var(--radius-pre);
+	}
+
+	code {
+		font-size: .925em;
+	}
+
+	code::after,
+	code::before {
+		content: '`';
+	}
+
+	pre code::after,
+	pre code::before {
+		content: unset;
+	}
+
+	h2 code,
+	h3 code {
+		background: transparent;
+		border: none;
+	}
+
+	pre code {
+		display: inline-block;
+		padding: calc(var(--space, 1rem) - 1px) min(var(--space, 1rem), 4vw);
+		font-size: .9em;
+		background: var(--code-bg);
+		border-radius: var(--radius-pre);
+		min-width: 100%;
 	}
 </style>
 
