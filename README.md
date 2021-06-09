@@ -4,17 +4,6 @@ Nicely formatted, readable markdown articles!
 
 ---
 
-A file template proposal for readable markdown-only articles (e.g. **blog posts**). It should of course be parseable to HTML as well. Metadata is added without YAML front matter (YFM) in a more markdowny way. It looks a bit like YFM, but is markdown, is simpler, and a more natural part of the article. It's all basic markdown.
-
-**The goal** is a markdown template for complete articles including metadata that is as readable as possible as markdown-only, and when it's rendered without specific HTML/CSS (for instance at Github). And with a possible output that is fully usable in an application of any kind.
-
-*Why not standard YFM/front-matter?* YAML front matter (or separated front matter in general) has become the standard for metadata of markdown articles and blog posts. There are two problems with that:
-
-1. It's not markdown and not a natural part of the text-only markdown content.
-2. If not taken into account when parsing markdown, front-matter is often parsed as a table at the top of the article (at Github for instance), or not parsed correctly. Generating bad, less readable HTML.
-
-## Markdown file
-
 ```markdown
 # Title
 
@@ -22,7 +11,8 @@ A subtitle or lead paragraph
 
 - unordered list item: metadata
 - key: single value
-- comma list: value, array
+- comma separated: array, of, values
+- no value---true boolean,
 
 An abstract of any markdown elements.
 
@@ -43,15 +33,27 @@ JSON output:
 
   "deck": "A subtitle or lead paragraph",
 
-  "unordered list items": "metadata",
+  "unordered list item": "metadata",
   "key": "single value",
-  "comma list": ["value", "array"],
+  "comma separated": ["array", "of", "values"],
+  "no-value---true-boolean" : true,
 
   "abstract": "<p>An abstract of any markdown elements.</p>",
 
   "body": "<p>The content body in <em>normal</em> markdown.</p>"
 }
 ```
+
+## Background
+
+A file template proposal for readable markdown-only articles (e.g. **blog posts**). It should of course be parseable to HTML as well. Metadata is added without YAML front matter (YFM) in a more markdowny way. It looks a bit like YFM, but is markdown, is simpler, and a more natural part of the article. It's all basic markdown.
+
+**The goal** is a markdown template for complete articles including metadata that is as readable as possible as markdown-only, and when it's rendered without specific HTML/CSS (for instance at Github). And with a possible output that is fully usable in an application of any kind.
+
+*Why not standard YFM/front-matter?* YAML front matter (or separated front matter in general) has become the standard for metadata of markdown articles and blog posts. There are two problems with that:
+
+1. It's not markdown and not a natural part of the text-only markdown content.
+2. If not taken into account when parsing markdown, front-matter is often parsed as a table at the top of the article (at Github for instance), or not parsed correctly. Generating bad, less readable HTML.
 
 ## Output explanation
 
@@ -77,9 +79,10 @@ There's also an outline for a long output version:
 		"markdown": "A subtitle or lead paragraph"
 	},
 
-	"unordered list items": "metadata",
+	"unordered list item": "metadata",
 	"key": "single value",
-	"comma list": ["value", "array"],
+	"comma separated": ["value", "array"],
+	"no-value---true-boolean" : true,
 
 	"abstract": {
 		"html": "<p>An abstract of any markdown elements.</p>",
