@@ -1,8 +1,12 @@
 import marked from 'marked';
 
-/** (markdown string) - return string of HTML */
-export default function (markdown, opt = { inline: false }) {
+/** (string, object) - return string of HTML from string of markdown */
+export default function (markdown, opt) {
 	const renderer = new marked.Renderer();
+
+	if (!opt.inline) opt.inline = false;
+
+	console.log(opt);
 
 	if (opt && opt.markedSetOptions)
 		marked.setOptions(opt.markedSetOptions);

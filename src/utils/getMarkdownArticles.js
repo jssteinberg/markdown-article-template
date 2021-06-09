@@ -12,8 +12,10 @@ const getObjectListFromMarkdownFiles = (folder, files, opt, index = 0) => {
 	else return res.concat(getObjectListFromMarkdownFiles(folder, files, opt, (index + 1)));
 };
 
-/** (string, [{longOutput: boolean}]) - return [] */
-export default function (folder, opt = { longOutput: false }) {
+/** (string, [object]) - return [] */
+export default function (folder, opt) {
+	if (!opt.longOutput) opt.longOutput = false;
+
 	try {
 		// get all *.md files
 		const files = fs.

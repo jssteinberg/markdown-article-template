@@ -7,7 +7,7 @@ export default function (markdown = '', opt = { longOutput: false }) {
 
 	const getHtmlFromMarkdown = (markdown) => {
 		if (opt && opt.markedSetOptions)
-			return getHtml(markdown, opt.markedSetOptions);
+			return getHtml(markdown, opt);
 
 		return getHtml(markdown);
 	};

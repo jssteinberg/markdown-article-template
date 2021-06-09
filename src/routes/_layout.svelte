@@ -24,8 +24,9 @@
 
 	:root {
 		--space: calc(1rem * (1 + var(--added-lead)));
-		--reading-width: 45rem;
-		--menu-width: 250px;
+		--h-added-lead: .25;
+
+		--reading-width: 50rem;
 
 		--font-system: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 		--h-font: var(--font-system);
@@ -48,7 +49,7 @@
 	}
 
 	body {
-		max-width: 50em;
+		max-width: var(--reading-width);
 		margin: var(--space, 1em) auto;
 		padding: 0 1ch;
 
@@ -87,7 +88,8 @@
 		max-width: unset;
 		overflow: auto;
 		white-space: pre;
-		box-shadow: 0 1px 1px 1px hsla(var(--bg-h),0%,calc(var(--bg-l) - 40%),40%);
+		box-shadow: 0 0 0 .1em hsla(var(--bg-h),0%,calc(var(--bg-l) - 40%),40%),
+			0 0 0 .1em hsla(var(--bg-h),0%,calc(var(--bg-l) + 80%),80%);
 		border-radius: var(--radius-pre);
 	}
 
@@ -118,6 +120,27 @@
 		background: var(--code-bg);
 		border-radius: var(--radius-pre);
 		min-width: 100%;
+	}
+
+	pre code * {
+		opacity: .55;
+	}
+
+	pre code .hljs-keyword,
+	pre code .hljs-string,
+	pre code .hljs-section,
+	pre code .hljs-emphasis {
+		opacity: 1;
+	}
+
+	pre code .hljs-keyword,
+	pre code .hljs-punctuation,
+	pre code .hljs-attr {
+		font-weight: bold;
+	}
+
+	pre code .hljs-emphasis {
+		font-style: italic;
 	}
 </style>
 
