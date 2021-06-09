@@ -6,8 +6,6 @@ export default function (markdown, opt) {
 
 	if (!opt.inline) opt.inline = false;
 
-	console.log(opt);
-
 	if (opt && opt.markedSetOptions)
 		marked.setOptions(opt.markedSetOptions);
 	else
