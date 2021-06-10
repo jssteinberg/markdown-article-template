@@ -35,8 +35,8 @@ JSON output:
 
   "unordered list item": "metadata",
   "key": "single value",
-  "comma separated": ["array", "of", "values"],
-  "no value---true boolean" : true,
+  "comma_separated": ["array", "of", "values"],
+  "no_value---true_boolean": true,
 
   "abstract": "<p>An abstract of any markdown elements.</p>",
 
@@ -81,8 +81,8 @@ There's also an outline for a long output version:
 
 	"unordered list item": "metadata",
 	"key": "single value",
-	"comma separated": ["value", "array"],
-	"no value---true boolean" : true,
+	"comma_separated": ["value", "array"],
+	"no_value---true_boolean": true,
 
 	"abstract": {
 		"html": "<p>An abstract of any markdown elements.</p>",
