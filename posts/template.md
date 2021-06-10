@@ -1,13 +1,16 @@
-# Post title
+# Title
 
-The deck---a subtitle or a lead paragraph.
+Deck: A subtitle or lead paragraph.
 
-- Author: Johan S. Steinberg
-- Edited: 2021-05-18, 2021-05-21, 2021-05-28
-- #: markdown, article, template
+- Unordered list item: metadata
+- Key: single value
+- Comma separated: array, of, values
+- No value---true boolean
 
-The abstract---an article summary with any number of markdown block elements.
+An abstract of any markdown elements.
 
 ---
 
-An horizontal rule separates the article header from the body content.
+*An horizontal rule separates the header from the body content.*
+
+The content body in *normal* markdown.

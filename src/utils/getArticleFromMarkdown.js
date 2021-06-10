@@ -16,7 +16,7 @@ export default function (markdown = '', opt = { longOutput: false }) {
 	const getInlineHtmlStringFromMarkdownBlock = (text = '') =>
 		getHtmlFromMarkdown(text).replace(/^<[^>]+>(.*)<\/[^>]+>$/g, '$1');
 
-	/** getHeaderMetadata(string) - recursive to get all values into one object - return {object} */
+	/** getHeaderMetadata(string[, boolean, number]) - recursive to get all values into one object - return {} */
 	const getHeaderMetadata = (mdItems, generated = false, index = 0) => {
 		if (generated && mdItems[index + 1])
 			return { ...mdItems[index], ...getHeaderMetadata(mdItems, true, index + 1) };
@@ -26,21 +26,24 @@ export default function (markdown = '', opt = { longOutput: false }) {
 		return getHeaderMetadata(
 			mdItems.
 				split('\n').
-				filter(x => x.match(/^\s*[-*]\s*.+:\s*.+/)).
+				filter(x => x.match(/^\s*[-*]\s*.+/)).
 				map((mdItem) => {
-					let res = {};
+					let metadata = {};
 
-					res[mdItem.replace(/[-|*]\s*([^:]+)[^]*/, '$1').trim().toLowerCase()] = (() => {
-						const val = mdItem.replace(/[-|*][^:]+:(.*)/, '$1').trim().split(/\s*,\s*/);
+					// Populate metadata properties
+					metadata[mdItem.replace(/[-|*]\s*([^:]+)[^]*/, '$1').trim()] = (function(mdLi) {
+						const val = mdLi.match(/:/) ?
+							mdLi.replace(/[-|*][^:]+:(.*)/, '$1').trim().split(/\s*,\s*/)
+							: true;
 
 						/* If single value, return value, else return array of values */
-						if (val.length === 1) return val[0];
+						if (val.length && val.length === 1) return val[0];
 						else return val;
-					})();
+					})(mdItem);
 
-					return res;
+					return metadata;
 				}),
-			true
+			true // set `generated` to `true`
 		);
 	};
 
