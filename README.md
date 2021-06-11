@@ -1,6 +1,6 @@
-# Template proposal for articles in Markdown
+# Markdown Article Template Proposal
 
-Nicely formatted, readable markdown articles!
+Nicely formatted, readable markdown articles---as markdown
 
 ---
 
