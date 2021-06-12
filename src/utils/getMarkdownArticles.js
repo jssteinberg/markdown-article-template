@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import getObjectFromMarkdown from './getArticleFromMarkdown.js';
 
-/** getObjectListFromMarkdownFiles(string, [], {}, [number=0]) - return [] */
+/** (string, object[], object, [number=0]) - return [] */
 const getObjectListFromMarkdownFiles = (folder, files, opt, index = 0) => {
 	const rawFile = fs.readFileSync(path.resolve(folder, files[index]), 'utf8');
 	const res = [{'file': files[index], ...getObjectFromMarkdown(rawFile, opt)}];

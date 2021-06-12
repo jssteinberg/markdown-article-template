@@ -1,6 +1,9 @@
 import marked from 'marked';
 
-/** (string, object) - return string of HTML from string of markdown */
+/** return string of HTML from string of markdown
+	* @param {string} markdown
+	* @param {object} opt
+	* @returns {string} - html */
 export default function (markdown, opt) {
 	const renderer = new marked.Renderer();
 

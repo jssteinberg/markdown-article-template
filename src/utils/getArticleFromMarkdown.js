@@ -1,6 +1,6 @@
 import getHtml from './getHtmlFromMarkdown.js';
 
-/** (string) - return {object} */
+/** (string='', [object={longOutput: false}]) - return {} */
 export default function (markdown = '', opt = { longOutput: false }) {
 	const regexLiLevel1 = /^-|\*\s/;
 	const regexHr = /^([-*]\s?)+$/;
@@ -12,11 +12,11 @@ export default function (markdown = '', opt = { longOutput: false }) {
 		return getHtml(markdown);
 	};
 
-	/** getInlineHtmlStringFromMarkdownBlock(string). Remove wrapping HTML tag. return {string} - HTML */
+	/** (string=''). Remove wrapping HTML tag. return '' - HTML */
 	const getInlineHtmlStringFromMarkdownBlock = (text = '') =>
 		getHtmlFromMarkdown(text).replace(/^<[^>]+>(.*)<\/[^>]+>$/g, '$1');
 
-	/** getHeaderMetadata(string[, boolean, number]) - recursive to get all values into one object - return {} */
+	/** (string[, boolean=false, number=0]) - recursive to get all values into one object - return {} */
 	const getHeaderMetadata = (mdItems, generated = false, index = 0) => {
 		if (generated && mdItems[index + 1])
 			return { ...mdItems[index], ...getHeaderMetadata(mdItems, true, index + 1) };
@@ -47,14 +47,14 @@ export default function (markdown = '', opt = { longOutput: false }) {
 		);
 	};
 
-	/**
-	 * @const markdownBlocks - array of markdown text blocks.
+	/** @const markdownBlocks - array of markdown text blocks.
 	 *
 	 * - trim() to remove leading empty lines or spaces.
 	 * - `\n\n+`: the `+` to deal with more lines between blocks.
 	 */
 	const markdownBlocks = markdown.trim().split(/\n\n+/);
 
+	/** (object[][, boolean=false, number=0]) */
 	const getObjectList = (mdEls, longOutput = false, i = 0) => {
 		const getFormattedInlineHtmlVal = (val, source, isLong) => isLong ? { inlineHtml: val, markdown: source } : val;
 		const getFormattedHtmlVal = (val, source, isLong) => isLong ? { html: val, markdown: source } : val;
