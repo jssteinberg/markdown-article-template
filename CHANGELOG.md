@@ -1,1 +1,2 @@
+- v. 0.0.3: add no value meta data as true boolean; define meta data types as string or array only
 - v. 0.0.2: added long output option
