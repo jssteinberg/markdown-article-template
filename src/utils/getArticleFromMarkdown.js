@@ -31,10 +31,10 @@ export default function (markdown = '', opt = { longOutput: false }) {
 					let metadata = {};
 
 					// Populate metadata properties
-					metadata[mdItem.replace(/[-|*]\s*([^:]+)[^]*/, '$1').trim().toLowerCase().replaceAll(/\s/, '_')] = (function(mdLi) {
+					metadata[mdItem.replace(/[-|*]\s*([^:]+)[^]*/, '$1').trim().toLowerCase().replaceAll(/\s/g, '_')] = (function(mdLi) {
 						const val = mdLi.match(/:/) ?
 							mdLi.replace(/[-|*][^:]+:(.*)/, '$1').trim().split(/\s*,\s*/)
-							: true;
+							: "true";
 
 						/* If single value, return value, else return array of values */
 						if (val.length && val.length === 1) return val[0];
