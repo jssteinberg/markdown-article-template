@@ -1,6 +1,6 @@
 <script>
 	import A11yWrapper, { a11yTitle } from '../components/A11yAppWrapper.svelte';
-	import Nav from '../components/Nav.svelte';
+	/* import Nav from '../components/Nav.svelte'; */
 
 	const updateA11yTitle = () => {
 		if (!segment) a11yTitle.set('Home');
@@ -145,9 +145,11 @@
 </style>
 
 <A11yWrapper class="page">
+	<!--
 	<div slot="header">
 		<Nav {segment}></Nav>
 	</div>
+	-->
 
 	<slot></slot>
 </A11yWrapper>
