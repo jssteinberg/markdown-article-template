@@ -117,28 +117,6 @@ See [src/utils/](https://github.com/jssteinberg/markdown-article-template/tree/m
 
 Boolean and numbers are both output as strings.
 
-Sapper is used here to test the implementation.
-
-## About the sapper template
-
-https://github.com/jssteinberg/sapper-floor-template
-
-- The default Sapper template,
-- updated to latest packages,
-- accessible routing (A11yAppWrapper.svelte component),
-- added postcss, postcss-import, svelte-preprocess and floor-typography-css,
-
-...for setting up a [Sapper](https://github.com/sveltejs/sapper) project.
-
-Uses Rollup as bundler.
-
-### Running the code in development mode
-
-```sh
-npm install
-npm run dev
-```
-
-This will start the development server on [localhost:3000](http://localhost:3000). Go to http://localhost:3000/posts.json for the implementation output.
+*[Sapper](https://github.com/jssteinberg/sapper-floor-template) is used here to test the implementation.*
 
 [phrasing]: https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#phrasing_content
