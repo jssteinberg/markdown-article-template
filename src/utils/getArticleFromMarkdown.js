@@ -1,10 +1,10 @@
 import getHtml from './getHtmlFromMarkdown.js';
 
-/** (string='', [object={longOutput: false}]) - return {} */
-export default function (markdown = '', opt = { longOutput: false }) {
-	const regexLiLevel1 = /^-|\*\s/;
-	const regexHr = /^([-*]\s?)+$/;
+const regexMdLiLvl1 = /^-|\*\s/;
+const regexMdHr = /^([-*]\s?)+$/;
 
+/** (string=''[, object={longOutput: false}]) - return {} */
+export default function (markdown = '', opt = { longOutput: false }) {
 	const getHtmlFromMarkdown = (markdown) => {
 		if (opt && opt.markedSetOptions)
 			return getHtml(markdown, opt);
@@ -63,17 +63,17 @@ export default function (markdown = '', opt = { longOutput: false }) {
 			if (elIndex === 0)
 				return { title: getFormattedInlineHtmlVal( getInlineHtmlStringFromMarkdownBlock(mdEl), mdEl, longOutput ) };
 			// Return subtitle, also set it to excerpt dependent on the template style
-			if (elIndex === 1 && !mdEl.match(regexLiLevel1))
+			if (elIndex === 1 && !mdEl.match(regexMdLiLvl1))
 				return { deck: getFormattedInlineHtmlVal( getInlineHtmlStringFromMarkdownBlock(mdEl), mdEl, longOutput ) };
 			// Return metadata (can be index 1)
-			if (mdEl.match(regexLiLevel1))
+			if (mdEl.match(regexMdLiLvl1))
 				return getHeaderMetadata(mdEl);
 
 			return { abstract: getFormattedHtmlVal( getHtmlFromMarkdown(mdEl), mdEl, longOutput ) };
 		};
 
 		// If next el not <hr>, recurse
-		if ( mdEls[i] && !mdEls[i].match(regexHr) ) {
+		if ( mdEls[i] && !mdEls[i].match(regexMdHr) ) {
 			const thisHeaderRetVal = getHeaderRetVal(mdEls[i], i);
 			let restOfRetVals = getObjectList(mdEls, longOutput, i + 1);
 

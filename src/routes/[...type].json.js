@@ -8,6 +8,8 @@ hljs.registerLanguage('markdown', markdown);
 export async function get(req, res) {
 	const {type} = req.params;
 	const isFile = type[0].match(/\..+$/);
+
+	// How to use utils!
 	const opt = {
 		markedSetOptions: {
 			smartLists: true,
@@ -15,7 +17,13 @@ export async function get(req, res) {
 			highlight: function(code, lang) {
 				return hljs.highlight(code, {language: lang}).value;
 			}
-		}
+		},
+		sortBy: {
+			property: 'edited',
+			type: 'date',
+			// index: -1,
+		},
+		// longOutput: true,
 	};
 	const data = isFile ?
 		getObjectListFromMarkdownArticles(`./`, opt)

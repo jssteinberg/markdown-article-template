@@ -2,7 +2,34 @@ import fs from 'fs';
 import path from 'path';
 import getObjectFromMarkdown from './getArticleFromMarkdown.js';
 
-/** (string, object[], object, [number=0]) - return [] */
+const getSortedArticles = (articles, opt) => {
+	const getListSortedByString = (prop, arr) => arr.
+		sort((a,b) => {
+			// remove tags
+			const getSortReadyString = (str) => str.toLowerCase().replace(/<[^>]+>/g, '');
+			// get prop val, even if deep
+			const getProp = (prop, val) => prop.split('.').reduce((acc, c) => acc && acc[c], val);
+
+			a = getSortReadyString(getProp(prop, a));
+			b = getSortReadyString(getProp(prop, b));
+
+			return a > b ? -1 : b > a ? 1 : 0;
+		}).
+		reverse();
+
+	// Sort by title
+	articles = getListSortedByString(articles[0].title.inlineHtml ? 'title.inlineHtml' : 'title', articles);
+
+	if (opt.sortBy) {
+		return articles
+			// .sort ...
+	}
+
+	return articles;
+		// Sort by opt prop
+};
+
+/** (string, object[], object[, number=0]) - return [] */
 const getObjectListFromMarkdownFiles = (folder, files, opt, index = 0) => {
 	const rawFile = fs.readFileSync(path.resolve(folder, files[index]), 'utf8');
 	const res = [{'file': files[index], ...getObjectFromMarkdown(rawFile, opt)}];
@@ -12,8 +39,8 @@ const getObjectListFromMarkdownFiles = (folder, files, opt, index = 0) => {
 	else return res.concat(getObjectListFromMarkdownFiles(folder, files, opt, (index + 1)));
 };
 
-/** (string, [object]) - return [] */
-export default function (folder, opt) {
+/** (string[, object]) - return [] */
+export default function (folder, opt = {longOutput: false, sortBy: null}) {
 	if (!opt.longOutput) opt.longOutput = false;
 
 	try {
@@ -22,8 +49,9 @@ export default function (folder, opt) {
 			readdirSync(folder).
 			filter(filename => path.extname(filename) === '.md');
 
-		return getObjectListFromMarkdownFiles(folder, files, opt);//.
-			// sort((a,b) => new Date(b.date) - new Date(a.date));
+		return getSortedArticles(
+			getObjectListFromMarkdownFiles(folder, files, opt), opt
+		);
 	} catch (error) {
 		console.log(error);
 		return [];

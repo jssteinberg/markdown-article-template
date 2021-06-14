@@ -1,6 +1,9 @@
 # Markdown Article Template Proposal
 
-Nicely formatted, readable markdown articles, when reading them in plain-text markdown
+Nicely formatted, readable markdown articles---readable in plain-text markdown
+
+- By: Johan S. Steinberg
+- #: markdown, article, template, api, proposal, markdown-article-template, markdown-post-template
 
 ---
 
@@ -9,10 +12,14 @@ Nicely formatted, readable markdown articles, when reading them in plain-text ma
 
 Nicely formatted, readable markdown articles, when reading them in plain-text markdown
 
-- Author: Johan S. Steinberg
-- #: markdown, article, template, api, proposal
+- By: Johan S. Steinberg
+- #: markdown, article, template, api, proposal, markdown-article-template, markdown-post-template
+
+An abstract of normal markdown.
 
 ---
+
+Body content of normal markdown.
 ```
 
 A file template proposal for readable markdown-only articles (e.g. **blog posts**). Metadata is added without YAML front matter (YFM) in a more markdowny way. It looks a bit like YFM, but is markdown, is simpler, and a more natural part of the article. It's all basic markdown, which of course is parseable as HTML as well.

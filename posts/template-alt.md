@@ -1,5 +1,5 @@
 
-## **Alternative template with excerpt at top and other oddities**
+## **Xtreme template with excerpt at top and other oddities**
 
 No subtitle, only excerpt. Or will also be subtitle if right below title.
 
