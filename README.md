@@ -126,4 +126,24 @@ Boolean and numbers are both output as strings.
 
 *[Sapper](https://github.com/jssteinberg/sapper-floor-template) is used here to test the implementation.*
 
+```javascript
+// How to use utils!
+// `opt` parameter
+const opt = {
+	markedSetOptions: {
+		smartLists: true,
+		smartypants: true,
+		highlight: function(code, lang) {
+			return hljs.highlight(code, {language: lang}).value;
+		}
+	},
+	sortBy: {
+		property: ['edited', 'redigert'],
+		type: 'date',
+		index: -1,
+	},
+	// longOutput: true,
+};
+```
+
 [phrasing]: https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#phrasing_content
