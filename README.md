@@ -124,6 +124,8 @@ See [src/utils/](https://github.com/jssteinberg/markdown-article-template/tree/m
 
 Boolean and numbers are both output as strings.
 
+A collection of articles is by default sorted by title, then overridden by `sortBy`. So if any articles are missing a sortBy property they are moved to the end but in order by title.
+
 *[Sapper](https://github.com/jssteinberg/sapper-floor-template) is used here to test the implementation.*
 
 ```javascript
