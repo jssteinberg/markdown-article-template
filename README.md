@@ -120,6 +120,8 @@ Generated key names and values:
 
 ## Simple implementation
 
+*Under construction!*
+
 See [src/utils/](https://github.com/jssteinberg/markdown-article-template/tree/main/src/utils) for a simple Javascript implementation using the marked library and regex of both markdown and HTML strings to create the output for an API.
 
 Boolean and numbers are both output as strings.
