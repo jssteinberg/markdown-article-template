@@ -19,9 +19,9 @@ export async function get(req, res) {
 			}
 		},
 		sortBy: {
-			property: 'edited',
+			property: ['edited', 'redigert'],
 			type: 'date',
-			// index: -1,
+			index: -1,
 		},
 		// longOutput: true,
 	};
