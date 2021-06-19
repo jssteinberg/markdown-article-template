@@ -2,8 +2,8 @@
 
 Nicely formatted markdown articles---nice & readable in its plain-text form
 
-- By: Johan S. Steinberg
-- #: markdown, article, template, api, proposal, markdown-article-template, markdown-post-template
+* By: Johan S. Steinberg
+* Tagged: markdown, article, template, api, proposal, markdown-article-template, markdown-post-template
 
 A file template proposal for readable markdown-only articles (e.g. **blog posts**). Expanding upon [the original idea of readable plain text files][org].
 
@@ -43,10 +43,10 @@ Metadata is added without YAML front matter (YFM) in a more markdowny way. It lo
 
 A subtitle or lead paragraph
 
-- unordered list item: metadata
-- key: single value
-- comma separated: array, of, values
-- no value---true boolean,
+* unordered list item: metadata
+* key: single value
+* comma separated: array, of, values
+* no value---true boolean,
 
 An abstract of any markdown elements.
 
