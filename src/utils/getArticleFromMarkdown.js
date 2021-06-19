@@ -3,7 +3,7 @@ import getHtml from './getHtmlFromMarkdown.js';
 const regexMdLiLvl1 = /^-|\*\s/;
 const regexMdHr = /^([-*]\s?)+$/;
 
-/** (string=''[, object={longOutput: false}]) - return {} */
+/** (string=''[, object={longOutput: false}]) - return {} article */
 export default function (markdown = '', opt = { longOutput: false }) {
 	const getHtmlFromMarkdown = (markdown) => {
 		if (opt && opt.markedSetOptions)

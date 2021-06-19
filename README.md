@@ -1,16 +1,18 @@
 # Markdown Article Template Proposal
 
-Nicely formatted, readable markdown articles---readable in plain-text markdown
+Nicely formatted markdown articles---nice & readable in its plain-text form
 
 - By: Johan S. Steinberg
 - #: markdown, article, template, api, proposal, markdown-article-template, markdown-post-template
 
+A file template proposal for readable markdown-only articles (e.g. **blog posts**). Expanding upon [the original idea of readable plain text files][org].
+
 ---
 
 ```markdown
-# Markdown Article Template Proposal
+# Markdown Article Title
 
-Nicely formatted, readable markdown articles, when reading them in plain-text markdown
+A subtitle or lead paragraph, called "deck"
 
 - By: Johan S. Steinberg
 - #: markdown, article, template, api, proposal, markdown-article-template, markdown-post-template
@@ -22,7 +24,7 @@ An abstract of normal markdown.
 Body content of normal markdown.
 ```
 
-A file template proposal for readable markdown-only articles (e.g. **blog posts**). Metadata is added without YAML front matter (YFM) in a more markdowny way. It looks a bit like YFM, but is markdown, is simpler, and a more natural part of the article. It's all basic markdown, which of course is parseable as HTML as well.
+Metadata is added without YAML front matter (YFM) in a more markdowny way. It looks a bit like YFM, but is markdown, is simpler, and a more natural part of the article. It's all basic markdown, which of course can be processed to HTML as well.
 
 **The goal** is a markdown template for complete articles including metadata that is as readable as possible as markdown-only, and when it's rendered without specific HTML/CSS (for instance at Github). And with a possible output that is fully usable in an application of any kind.
 
@@ -32,6 +34,7 @@ A file template proposal for readable markdown-only articles (e.g. **blog posts*
 
 1. It's not markdown and not a natural part of the text-only markdown content.
 2. When the file is parsed in a generic context, front-matter is often output as a table at the top of the article (at Github for instance), or not parsed correctly. Generating bad, less readable HTML, or errors.
+
 
 ## Markdown Template Proposal
 
@@ -57,6 +60,7 @@ The content body in *normal* markdown.
 Only the title is required.
 
 The metadata (which is in the unordered list above the horizontal rule) only support strings and arrays containing the former. The language in question must cast to other types if needed.
+
 
 ## Output
 
@@ -118,6 +122,7 @@ Generated key names and values:
 }
 ```
 
+
 ## Simple implementation
 
 *Under construction!*
@@ -127,6 +132,10 @@ See [src/utils/](https://github.com/jssteinberg/markdown-article-template/tree/m
 Boolean and numbers are both output as strings.
 
 A collection of articles is by default sorted by title, then overridden by `sortBy`. So if any articles are missing a sortBy property they are moved to the end but in order by title.
+
+`sortBy`:
+
+- `type`: a string of [Javascript type](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures) (it can be lowercase)
 
 *[Sapper](https://github.com/jssteinberg/sapper-floor-template) is used here to test the implementation.*
 
@@ -151,3 +160,4 @@ const opt = {
 ```
 
 [phrasing]: https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#phrasing_content
+[org]: https://daringfireball.net/projects/markdown/syntax#philosophy

@@ -1,6 +1,6 @@
 {
   "name": "markdown-article-template-proposal",
-  "description": "Nicely formatted, readable markdown articles, when reading them in plain-text markdown",
+  "description": "Nicely formatted markdown articles---nice & readable in its plain-text form",
   "version": "0.0.3",
   "scripts": {
     "dev": "sapper dev",

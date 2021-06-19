@@ -19,11 +19,23 @@ export async function get(req, res) {
 			}
 		},
 		sortBy: {
-			property: ['edited', 'redigert'],
+			property: ['edited', 'redigert'], // index > 0: fallback properties
 			type: 'date',
-			index: -1,
+			index: -1, // index to use for sorting in properties that are arrays
 		},
+		inFolder: true,
 		// longOutput: true,
+		// sortBy: [
+		// 	{
+		// 		property: ['edited', 'redigert'],
+		// 		type: 'date',
+		// 		index: -1, // index to use for sorting in properties that are arrays
+		// 	},
+		// 	{
+		// 		property: ['me_then?'],
+		// 		type: 'number',
+		// 	},
+		// ],
 	};
 	const data = isFile ?
 		getObjectListFromMarkdownArticles(`./`, opt)
