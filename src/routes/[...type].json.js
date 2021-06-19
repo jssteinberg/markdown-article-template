@@ -23,7 +23,7 @@ export async function get(req, res) {
 			type: 'date',
 			index: -1, // index to use for sorting in properties that are arrays
 		},
-		inFolder: true,
+		inFolder: !isFile,
 		// longOutput: true,
 		// sortBy: [
 		// 	{
