@@ -1,7 +1,7 @@
 {
-  "name": "markdown-article-template-proposal",
+  "name": "header-based-mardown-article",
   "description": "Nicely formatted markdown articles---nice & readable in its plain-text form",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",
