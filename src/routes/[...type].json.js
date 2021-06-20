@@ -18,24 +18,24 @@ export async function get(req, res) {
 				return hljs.highlight(code, {language: lang}).value;
 			}
 		},
-		sortBy: {
-			property: ['edited', 'redigert'], // index > 0: fallback properties
-			type: 'date',
-			index: -1, // index to use for sorting in properties that are arrays
-		},
 		inFolder: !isFile,
 		// longOutput: true,
-		// sortBy: [
-		// 	{
-		// 		property: ['edited', 'redigert'],
-		// 		type: 'date',
-		// 		index: -1, // index to use for sorting in properties that are arrays
-		// 	},
-		// 	{
-		// 		property: ['me_then?'],
-		// 		type: 'number',
-		// 	},
-		// ],
+		// sortBy: {
+		// 	property: ['edited', 'redigert'], // index > 0: fallback properties
+		// 	type: 'date',
+		// 	index: -1, // index to use for sorting in properties that are arrays
+		// },
+		sortBy: [
+			{
+				property: ['edited', 'redigert'],
+				type: 'date',
+				index: -1, // index to use for sorting in properties that are arrays
+			},
+			{
+				property: ['me_then?'],
+				type: 'number',
+			},
+		],
 	};
 	const data = isFile ?
 		getObjectListFromMarkdownArticles(`./`, opt)

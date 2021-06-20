@@ -63,13 +63,14 @@ const getSortedListFromSortBy = (list, sortBy, i) => {
 		&& sortBy.length
 		&& (typeof i === 'undefined' || i > -1)
 	) {
+		const getI = (sub) => typeof i === 'number' ? i - (sub - 1) : sortBy.length - sub;
 		return getSortedListFromSortBy(
 			getListSortedByType(
 				list,
-				sortBy[(i ? i : sortBy.length - 1)]
+				sortBy[getI(1)]
 			),
 			sortBy,
-			sortBy.length - 2
+			getI(2)
 		);
 	}
 	// if sortBy is object
@@ -81,7 +82,9 @@ const getSortedListFromSortBy = (list, sortBy, i) => {
 			list,
 			sortBy
 		);
-	} else return list;
+	} else {
+		return list;
+	}
 };
 
 /** ([], {}) - @return {object[]} */
