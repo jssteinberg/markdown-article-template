@@ -19,12 +19,13 @@ Meta data is added without YAML front matter (YFM) in a more markdowny way. It's
 
 **The goal** is a markdown file-template for complete articles, including meta data, that is as readable as possible in plain-text and when it's rendered without specific HTML/CSS (for instance at Github). And with a possible (Javascript, JSON, Graphql, ...) output that is fully usable in an application of any kind.
 
----
 
-*Why not standard YFM/front-matter?* YAML front matter (or separated front matter in general) has become the standard for meta data of markdown articles and blog posts. There are two problems with that:
+## Background
 
-1. It's not markdown and not a natural part of the text-only markdown content.
-2. When the file is parsed in a generic context, front-matter is often output as a table at the top of the article (at Github for instance), or not parsed correctly. Generating bad, less readable HTML, or errors.
+The problems with YAML front matter (and another front matter in another language):
+
+1. YFM isn't markdown and not a natural part of plain-text markdown.
+2. When markdown is converted to HTML in a generic context, YFM is at best output as a table at the top of the article (at Github for instance). In these general contexts YFM can lead to ugly, less readable HTML, or HTML errors.
 
 
 ## Markdown Template Proposal
