@@ -1,6 +1,6 @@
 {
-  "name": "footer-based-mardown-article",
-  "description": "Nicely formatted markdown articles---nice & readable in its plain-text form",
+  "name": "pretty-readable-markdown-concept",
+  "description": "Get output of pretty and readable plain-text markdown articles",
   "version": "0.2.0",
   "scripts": {
     "dev": "sapper dev",
@@ -24,7 +24,7 @@
     "@rollup/plugin-node-resolve": "^13.0.0",
     "@rollup/plugin-replace": "^2.2.0",
     "@rollup/plugin-url": "^6.0.0",
-    "floor-typography-css": "^19.0.3",
+    "floor-typography-css": "^20.0.0-0",
     "highlight.js": "^11.0.1",
     "marked": "^2.0.5",
     "postcss": "^8.2.12",
