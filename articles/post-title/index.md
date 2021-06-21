@@ -6,6 +6,7 @@ Normal content.
 
 ---
 Johan S. Steinberg,
-Author 2,
-* Edited: 2021-06-18, 2021-06-19
-* Tagged: css, unn
+Second Author
+* edited: 2021-06-18, 2021-06-19
+
+* tagged: css, unn
