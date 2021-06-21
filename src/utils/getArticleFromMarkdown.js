@@ -1,15 +1,14 @@
 import getHtml from './getHtmlFromMarkdown.js';
 
-/** (string='', [object={longOutput: false}]) - @return [object{}] article */
-export default function (markdown = '', opt = { longOutput: false }) {
+/** (string='', [object]) - @return {object} article */
+export default function (markdown = '', opt) {
+	/** (string) - @return {string} HTML */
 	const getHtmlFromMarkdown = (markdown) => {
 		if (opt && opt.markedSetOptions)
 			return getHtml(markdown, opt);
 
 		return getHtml(markdown);
 	};
-	const getFormattedInlineHtmlVal = (val, source, isLong) => isLong ? { inlineHtml: val, markdown: source } : val;
-	const getFormattedHtmlVal = (val, source, isLong) => isLong ? { html: val, markdown: source } : val;
 
 	/** (string=''). Remove wrapping HTML tag. @return {string} of HTML */
 	const getInlineHtmlStringFromMarkdownBlock = (text = '') =>
@@ -67,21 +66,21 @@ export default function (markdown = '', opt = { longOutput: false }) {
 	const markdownBlocks = markdown.trim().split(/\n\n+/);
 
 	/** (object[], [boolean=false], [number=0]) - @return {object} */
-	const getArticleObject = (mdEls, longOutput = false, i = 0) => {
-		const getHeaderVals = (mdEl, elIndex, isLong) => {
+	const getArticleObject = (mdEls, i = 0) => {
+		const getHeaderVals = (mdEl, elIndex) => {
 			// Return title
 			if (elIndex === 0)
-				return { title: getFormattedInlineHtmlVal( getInlineHtmlStringFromMarkdownBlock(mdEl), mdEl, isLong ) };
+				return { title: getInlineHtmlStringFromMarkdownBlock(mdEl) };
 			// Return lead
 			if (elIndex === 1)
-				return { lead: getFormattedInlineHtmlVal( getInlineHtmlStringFromMarkdownBlock(mdEl), mdEl, isLong ) };
+				return { lead: getInlineHtmlStringFromMarkdownBlock(mdEl) };
 		};
 
 		// Recurse...
 		if ( mdEls[i] && i < 2 ) {
 			return {
-				...getHeaderVals(mdEls[i], i, longOutput),
-				...getArticleObject(mdEls, longOutput, i + 1)
+				...getHeaderVals(mdEls[i], i),
+				...getArticleObject(mdEls, i + 1)
 			};
 
 		} else if ( mdEls[i] ) {
@@ -90,7 +89,7 @@ export default function (markdown = '', opt = { longOutput: false }) {
 			const footerDataMd = remainingMd.replace(/[^]*\n\n(-|–|—)+\n([^]*)/, '$2');
 			// Else return body (last val so no need for spread)
 			return {
-				body: getFormattedHtmlVal(getHtmlFromMarkdown(bodyMd), bodyMd, longOutput),
+				body: getHtmlFromMarkdown(bodyMd),
 				...getMetadata(footerDataMd)
 			};
 		}
@@ -98,5 +97,5 @@ export default function (markdown = '', opt = { longOutput: false }) {
 		return {};
 	};
 
-	return getArticleObject(markdownBlocks, opt.longOutput);
+	return getArticleObject(markdownBlocks);
 };
