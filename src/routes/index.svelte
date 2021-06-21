@@ -23,6 +23,6 @@
 
 {#if page && !page.length}
 	<h1>{@html page.title}</h1>
-	<p>{@html page.deck}</p>
+	<p>{@html page.deck || page.lead}</p>
 	{@html page.body}
 {/if}

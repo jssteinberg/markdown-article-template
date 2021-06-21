@@ -1,36 +1,29 @@
 # Markdown Article Template Proposal
 
-Nicely formatted markdown articles---nice & readable in its plain-text form
+Nicely formatted markdown articles---nice & readable in its plain-text form.
 
-* By: Johan S. Steinberg
-* Tagged: markdown, article, template, api, proposal, markdown-article-template, markdown-post-template
+A file template proposal for readable markdown-only articles (e.g. **blog posts**). Expanding upon [markdown's original concept of readable plain text files][org].
 
-A file template proposal for readable markdown-only articles (e.g. **blog posts**). Expanding upon [the original idea of readable plain text files][org].
-
----
 
 ```markdown
 # Markdown Article Title
 
-A subtitle or lead paragraph, called "deck"
+Nicely formatted markdown articles---nice & readable in its plain-text form.
 
-- By: Johan S. Steinberg
-- #: markdown, article, template, api, proposal, markdown-article-template, markdown-post-template
-
-An abstract of normal markdown.
+Body content in normal markdown.
 
 ---
-
-Body content of normal markdown.
+Johan S. Steinberg
+* Tagged: markdown, article, template, api, proposal, markdown-article-template, markdown-post-template
 ```
 
-Metadata is added without YAML front matter (YFM) in a more markdowny way. It looks a bit like YFM, but is markdown, is simpler, and a more natural part of the article. It's all basic markdown, which of course can be processed to HTML as well.
+Meta data is added without YAML front matter (YFM) in a more markdowny way. It looks a bit like YFM, but is markdown, is simpler, and a more natural part of the article. It's all basic markdown, which of course can be processed to HTML as well.
 
-**The goal** is a markdown template for complete articles including metadata that is as readable as possible as markdown-only, and when it's rendered without specific HTML/CSS (for instance at Github). And with a possible output that is fully usable in an application of any kind.
+**The goal** is a markdown template for complete articles including meta data that is as readable as possible as markdown-only, and when it's rendered without specific HTML/CSS (for instance at Github). And with a possible output that is fully usable in an application of any kind.
 
 ---
 
-*Why not standard YFM/front-matter?* YAML front matter (or separated front matter in general) has become the standard for metadata of markdown articles and blog posts. There are two problems with that:
+*Why not standard YFM/front-matter?* YAML front matter (or separated front matter in general) has become the standard for meta data of markdown articles and blog posts. There are two problems with that:
 
 1. It's not markdown and not a natural part of the text-only markdown content.
 2. When the file is parsed in a generic context, front-matter is often output as a table at the top of the article (at Github for instance), or not parsed correctly. Generating bad, less readable HTML, or errors.
@@ -41,25 +34,22 @@ Metadata is added without YAML front matter (YFM) in a more markdowny way. It lo
 ```markdown
 # Title
 
-A subtitle or lead paragraph
+A lead paragraph.
 
-* unordered list item: metadata
+The content body in normal markdown.
+
+---
+Optional Author Name,
+Several Names Separated By Comma
+* unordered list item: meta data
 * key: single value
 * comma separated: array, of, values
 * no value---true boolean,
-
-An abstract of any markdown elements.
-
----
-
-The content body in *normal* markdown.
 ```
 
-*The horizontal rule separates the article header from the body content.*
+The article ends with an horizontal rule immediately followed by the additional (meta) data.
 
-Only the title is required.
-
-The metadata (which is in the unordered list above the horizontal rule) only support strings and arrays containing the former. The language in question must cast to other types if needed.
+The meta data (which is in the unordered list below the horizontal rule) only support strings and arrays containing the former. The language in question must cast to other types if needed.
 
 
 ## Output
@@ -69,75 +59,74 @@ JSON output:
 ```json
 {
   "title": "Title",
-
-  "deck": "A subtitle or lead paragraph",
-
-  "unordered list item": "metadata",
+  "lead": "A lead paragraph.",
+  "body": "<p>The content body in normal markdown.</p>",
+  "by": ["Optional Author Name", "Several Names Separated By Comma"],
+  "unordered list item": "meta data",
   "key": "single value",
   "comma_separated": ["array", "of", "values"],
-  "no_value---true_boolean": "true",
-
-  "abstract": "<p>An abstract of any markdown elements.</p>",
-
-  "body": "<p>The content body in <em>normal</em> markdown.</p>"
+  "no_value---true_boolean": "true"
 }
 ```
 
-Generated key names and values:
 
-- title: A string that can contain inline HTML [HTML phrasing elements][phrasing].
-- deck: A string that can contain inline HTML.
-- [metadata key]: value(, or values)
-- abstract: A string of HTML from markdown before first horizontal rule, after deck and/or metadata.
-- body: A string of HTML from markdown after first horizontal rule.
+## The Subtitle Option
 
-*Optional long output version:*
+```markdown
+# Title: Subtitle
 
-```json
-{
-	"title": {
-		"inlineHtml": "Title",
-		"markdown": "# Title"
-	},
+A lead paragraph.
 
-	"deck": {
-		"inlineHtml": "A subtitle or lead paragraph",
-		"markdown": "A subtitle or lead paragraph"
-	},
+The content body in normal markdown.
 
-	"unordered list item": "metadata",
-	"key": "single value",
-	"comma_separated": ["value", "array"],
-	"no_value---true_boolean": "true",
+---
+Optional Author Name,
+Several Names Separated By Comma
+* unordered list item: meta data
+* key: single value
+* comma separated: array, of, values
+* no value---true boolean,
+```
 
-	"abstract": {
-		"html": "<p>An abstract of any markdown elements.</p>",
-		"markdown": "An abstract of any markdown elements."
-	},
 
-	"body": {
-		"html": "<p>The content body in <em>normal</em> markdown.</p>",
-		"markdown": "The content body in *normal* markdown."
-	}
-}
+## The Abstract Option
+
+An option to treat all markdown elements after the lead paragraph and before the first horizontal rule as the abstract.
+
+```markdown
+# Title: Subtitle
+
+A lead paragraph.
+
+An abstract consisting of any markdown elements.
+
+---
+
+The content body in normal markdown.
+
+---
+Optional Author Name,
+Several Names Separated By Comma
+* unordered list item: meta data
+* key: single value
+* comma separated: array, of, values
+* no value---true boolean,
 ```
 
 
 ## Simple implementation
 
-*Under construction!*
+*Under construction! At the moment [Sapper](https://github.com/jssteinberg/sapper-floor-template) is used to test the implementation.*
 
 See [src/utils/](https://github.com/jssteinberg/markdown-article-template/tree/main/src/utils) for a simple Javascript implementation using the marked library and regex of both markdown and HTML strings to create the output for an API.
 
 Boolean and numbers are both output as strings.
 
-A collection of articles is by default sorted by title, then overridden by `sortBy`. So if any articles are missing a sortBy property they are moved to the end but in order by title.
+A collection of articles is by default sorted by title, then overridden by `sortBy`. So if any articles are missing a sortBy property they are moved to the end in order by title.
 
 `sortBy`:
 
 - `type`: a string of [Javascript type](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures) (it can be lowercase)
-
-*[Sapper](https://github.com/jssteinberg/sapper-floor-template) is used here to test the implementation.*
 
 ```javascript
 // How to use utils!
@@ -159,5 +148,12 @@ const opt = {
 };
 ```
 
+
 [phrasing]: https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Content_categories#phrasing_content
 [org]: https://daringfireball.net/projects/markdown/syntax#philosophy
+
+
+---
+Johan S. Steinberg
+
+* Tagged: markdown, article, template, api, proposal, markdown-article-template, markdown-post-template

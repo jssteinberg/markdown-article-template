@@ -1,7 +1,7 @@
 {
-  "name": "header-based-mardown-article",
+  "name": "footer-based-mardown-article",
   "description": "Nicely formatted markdown articles---nice & readable in its plain-text form",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",
