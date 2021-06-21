@@ -1,4 +1,4 @@
-# Pretty-readable: Complete articles in plain-text markdown
+# Pretty and readable plain-text markdown articles
 
 A proposal for how to format markdown articles (e.g. blog posts) so they're readable in their plain-text form **and** can output the necessary meta data without e.g. YAML front matter. This expands upon [markdown's original concept of readable plain-text files](https://daringfireball.net/projects/markdown/syntax#philosophy).
 
