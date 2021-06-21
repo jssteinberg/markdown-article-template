@@ -2,14 +2,14 @@
 	import A11yWrapper, { a11yTitle } from '../components/A11yAppWrapper.svelte';
 	/* import Nav from '../components/Nav.svelte'; */
 
+	export let segment;
+
 	const updateA11yTitle = () => {
 		if (!segment) a11yTitle.set('Home');
 		else a11yTitle.set('');
 	};
 
 	$: updatedA11yTitle = updateA11yTitle(segment);
-
-	export let segment;
 </script>
 
 <style global>
@@ -24,6 +24,7 @@
 
 	:root {
 		--space: calc(1rem * (1 + var(--added-lead)));
+		--space-x: 1rem;
 		--h-added-lead: .25;
 
 		--reading-width: 50rem;
@@ -35,7 +36,7 @@
 		--fg-h: 0;
 		--bg-l: 100%;
 		--fg-l: 0%;
-		--code-bg: hsl(var(--bg-h),5%,calc(var(--bg-l) - 5%));
+		--code-bg: hsl(var(--bg-h),7.5%,calc(var(--bg-l) - 7.5%));
 
 		font-size: 1.1em;
 		background: hsl(var(--bg-h),0%,var(--bg-l));
@@ -51,7 +52,7 @@
 	body {
 		max-width: var(--reading-width);
 		margin: var(--space, 1em) auto;
-		padding: 0 1ch;
+		padding: 0 var(--space-x);
 
 		font-family: var(--font-system);
 		color: hsla(var(--fg-h),0%,var(--fg-l),87.5%);
@@ -82,15 +83,13 @@
 	/** Code blocks */
 
 	pre {
-		--space-pre: calc(var(--space) * .75);
-		--radius-pre: .9em;
-		width: 100%;
+		position: relative;
+		left: calc(-1 * var(--space-x, var(--space, 1rem)));
+		width: calc(var(--space-x, var(--space, 1rem)) * 2 + 100%);
 		max-width: unset;
+		margin: calc(var(--space, 1rem) * 2) 0;
 		overflow: auto;
-		white-space: pre;
-		box-shadow: 0 0 0 .1em hsla(var(--bg-h),0%,calc(var(--bg-l) - 40%),40%),
-			0 0 0 .1em hsla(var(--bg-h),0%,calc(var(--bg-l) + 80%),80%);
-		border-radius: var(--radius-pre);
+		/* white-space: pre; */
 	}
 
 	code {
@@ -115,15 +114,14 @@
 
 	pre code {
 		display: inline-block;
-		padding: calc(var(--space, 1rem) - 1px) min(var(--space, 1rem), 4vw);
+		padding: calc(var(--space, 1rem) - 1px) var(--space-x, var(--space, 1rem));
 		font-size: .9em;
 		background: var(--code-bg);
-		border-radius: var(--radius-pre);
 		min-width: 100%;
 	}
 
 	pre code * {
-		opacity: .55;
+		opacity: .6;
 	}
 
 	pre code .hljs-keyword,
