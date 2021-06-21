@@ -1,21 +1,21 @@
 # Pretty-readable: Complete articles in plain-text markdown
 
-A proposal for how to format markdown articles (e.g. **blog posts**) so they're readable in their plain-text form **and** can output the necessary meta data without e.g. YAML front matter. This expands upon [markdown's original concept of readable plain-text files](https://daringfireball.net/projects/markdown/syntax#philosophy).
+A proposal for how to format markdown articles (e.g. blog posts) so they're readable in their plain-text form **and** can output the necessary meta data without e.g. YAML front matter. This expands upon [markdown's original concept of readable plain-text files](https://daringfireball.net/projects/markdown/syntax#philosophy).
 
 
 ```markdown
-# Markdown Article Title
+# Title
 
-Nicely formatted markdown articles---nice & readable in its plain-text form.
+Nicely formatted markdown articles---nice and readable in their plain-text form.
 
-Body content in normal markdown.
+Valid, normal markdown.
 
 ---
 Johan S. Steinberg
-* Tagged: markdown, article, template, api, proposal, markdown-article-template, markdown-post-template
+* tagged: markdown, article, template, api, proposal, markdown-article-template, markdown-post-template
 ```
 
-Meta data is added without YAML front matter (YFM) in a more markdowny way. It's reminiscent of a simple YFM, but it's valid markdown, and a more natural part of a markdown file.
+Meta data is added without YAML front matter (YFM) in a more markdowny way. It's reminiscent of YFM, but simpler and it's valid markdown. It looks and feels as a more natural part of markdown.
 
 **The goal** is a markdown file-template for complete articles, including meta data, that is as readable as possible in plain-text and when it's rendered without specific HTML/CSS (for instance at Github). And with a possible (Javascript, JSON, Graphql, ...) output that is fully usable in an application of any kind.
 
