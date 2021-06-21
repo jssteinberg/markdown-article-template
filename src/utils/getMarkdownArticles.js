@@ -3,12 +3,12 @@ import path from 'path';
 import getObjectFromMarkdown from './getArticleFromMarkdown.js';
 import getSortedArticles from './getSortedListFromArticles.js';
 
-/** (string, object[], object, [number=0]) - @return {object[]} */
+/** (string, object[], [object], [number=0]) - @return {object[]} */
 const getObjectListFromMarkdownFiles = (folder, files, opt, index = 0) => {
 	const rawFile = fs.readFileSync(path.resolve(folder, files[index]), 'utf8');
 	const res = [{'file': files[index], ...getObjectFromMarkdown(rawFile, opt)}];
 
-	// return if no more files, else loop recursively
+	// Return if no more files, else loop recursively
 	if (typeof files[index + 1] === 'undefined') return res;
 	return res.concat(getObjectListFromMarkdownFiles(folder, files, opt, (index + 1)));
 };
@@ -18,7 +18,7 @@ export default function (folder, opt) {
 	if (!opt.longOutput) opt.longOutput = false;
 
 	try {
-		// get all *.md files
+		// Get all *.md files
 		let files = fs.
 			readdirSync(folder).
 			filter(filename => {
@@ -32,10 +32,21 @@ export default function (folder, opt) {
 				files[i] = files[i].replace(/\/$/, '') + '/index.md';
 		});
 
-		return getSortedArticles(
+		let articles = getSortedArticles(
 			getObjectListFromMarkdownFiles(folder, files, opt),
 			opt
 		);
+
+		// Filter if option
+		if (opt.filter)
+			articles =
+				articles.filter(article => {
+					const key = Object.keys(opt.filter)[0];
+					return article[key]
+					&& article[key].includes(opt.filter[key]);
+				});
+
+		return articles;
 	} catch (error) {
 		console.log(error);
 		return [];

@@ -37,8 +37,11 @@ export async function get(req, res) {
 			},
 		],
 	};
+
+	if (type[1]) opt.filter = {tagged: type[1]};
+
 	const data = isFile ?
-		getObjectListFromMarkdownArticles(`./`, opt)
+		getObjectListFromMarkdownArticles('./', opt)
 		: getObjectListFromMarkdownArticles(`${type[0]}/`, opt);
 
 	if (data) {
