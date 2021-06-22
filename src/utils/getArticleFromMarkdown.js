@@ -16,6 +16,7 @@ export default function (markdown = '', opt) {
 
 	/** (string|object[], [index=0]) - index for recursion - @return {object} */
 	const getMetadata = (mdItems, index = 0) => {
+		// Create array if not
 		if (!(mdItems instanceof Array)) {
 			// Split on start of line md list char (and whitespace)
 			const dataMdLvl1 = mdItems
@@ -23,9 +24,10 @@ export default function (markdown = '', opt) {
 			return dataMdLvl1.length ? getMetadata(dataMdLvl1): getMetadata([dataMdLvl1]);
 		}
 
+		// Return if item is undefined
 		if (typeof mdItems[index] === 'undefined') return {};
 
-		// If first item not list, it's author/by
+		// If first item insn't list, it's author/by
 		if (index === 0 && !mdItems[0].match(/^[-*]\s+/)) {
 			return {
 				by: mdItems[0].split(',').filter(x => !!x).map(x => x.trim()),
@@ -34,26 +36,33 @@ export default function (markdown = '', opt) {
 		}
 
 		// Remove possible first item md list
-		mdItems[index] = mdItems[index].replace(/^[-*]\s+([^]*)/, '$1');
+		const prop = mdItems[index].replace(/^[-*]\s+([^]*)/, '$1');
 
+		// Return rest of meta data properties
 		return {
-			...((item) => {
-				let metadata = {};
+			...(function (prop) {
+				const propKey = prop
+					.replace(/([^:]+)[^]*/, '$1')
+					.trim()
+					.toLowerCase()
+					.replace(/\s/g, '_');
+				
+				return {
+					[propKey]: (
+						// Add property value
+						function (prop) {
+							// Get value. If no ":" it's a true boolean
+							const val = prop.match(/:/) ?
+								prop.replace(/[^:]+:\s*(.*)/, '$1').trim().split(/\s*,\s*/)
+								: "true";
 
-				// Populate metadata properties
-				metadata[item.replace(/([^:]+)[^]*/, '$1').trim().toLowerCase().replace(/\s/g, '_')] = (function(mdLi) {
-					// Get value. If no ":" it's a true boolean
-					const val = mdLi.match(/:/) ?
-						mdLi.replace(/[^:]+:\s*(.*)/, '$1').trim().split(/\s*,\s*/)
-						: "true";
-
-					// If single value, return value, else return array of values
-					if (val.length && val.length === 1) return val[0];
-					else return val;
-				})(item);
-
-				return metadata;
-			})(mdItems[index]),
+							// If single value, return value, else return array of values
+							if (val.length && val.length === 1) return val[0];
+							else return val;
+						}
+					)(prop)
+				};
+			})(prop),
 			...getMetadata(mdItems, index + 1)
 		};
 	};
@@ -85,6 +94,7 @@ export default function (markdown = '', opt) {
 
 		} else if ( mdEls[i] ) {
 			const remainingMd = mdEls.slice(i).join('\n\n');
+			// Replace - hyphen – en-dash — em-dash, and retrieve values
 			const bodyMd = remainingMd.replace(/([^]*)\n\n(-|–|—)+\n[^]*/, '$1');
 			const footerDataMd = remainingMd.replace(/[^]*\n\n(-|–|—)+\n([^]*)/, '$2');
 			// Else return body (last val so no need for spread)

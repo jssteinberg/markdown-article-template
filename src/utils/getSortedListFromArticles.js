@@ -1,4 +1,4 @@
-/** (''|[], any) - get prop val, even if deep - @return {any} val */
+/** (string|object[], any, [index=0]) - get prop val, even if deep - @return {any} val */
 const getValFromProp = (prop, val, index = 0) => {
 	if (prop instanceof Array && prop.length > index) {
 		const res = prop[index].split('.').reduce((acc, c) => acc && acc[c], val);
@@ -8,7 +8,7 @@ const getValFromProp = (prop, val, index = 0) => {
 		return prop.split('.').reduce((acc, c) => acc && acc[c], val);
 };
 
-/** ('', []) - @return {object[]} */
+/** (string, object[]) - @return {object[]} */
 const getListSortedByString = (arr, sortByProp) => arr.
 	sort((a,b) => {
 		// remove tags
@@ -21,7 +21,7 @@ const getListSortedByString = (arr, sortByProp) => arr.
 	}).
 	reverse();
 
-/** ('YYYY-MM-DD[...]', []) - @return {object[]} */
+/** (string, object[]) - 'YYYY-MM-DD[...]' - @return {object[]} */
 const getListSortedByDateString = (list, sortBy) => list.
 	sort((a,b) => {
 		const getSingleDateString = (val) => val instanceof Array ?
@@ -39,7 +39,7 @@ const getListSortedByDateString = (list, sortBy) => list.
 		return 0;
 	});
 
-/** ([], {}) - @return {object[]} */
+/** (object[], object) - @return {object[]} */
 const getListSortedByType = (list, sortBy) => {
 	if (
 		sortBy.type
@@ -55,7 +55,7 @@ const getListSortedByType = (list, sortBy) => {
 	);
 };
 
-/** ([], {}, [number]) - recursive if sortBy is [] - @return {object[]} */
+/** (object[], object, [number]) - recursive if sortBy is array - @return {object[]} */
 const getSortedListFromSortBy = (list, sortBy, i) => {
 	// if sortBy is array, recursive
 	if (
@@ -64,6 +64,7 @@ const getSortedListFromSortBy = (list, sortBy, i) => {
 		&& (typeof i === 'undefined' || i > -1)
 	) {
 		const getI = (sub) => typeof i === 'number' ? i - (sub - 1) : sortBy.length - sub;
+
 		return getSortedListFromSortBy(
 			getListSortedByType(
 				list,
@@ -87,7 +88,7 @@ const getSortedListFromSortBy = (list, sortBy, i) => {
 	}
 };
 
-/** ([], {}) - @return {object[]} */
+/** (object[], object) - @return {object[]} */
 export default function (articles, opt) {
 	const {longOutput, sortBy} = opt;
 	// Sort by title
