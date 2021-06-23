@@ -117,7 +117,7 @@ Several Names Separated By Comma
 
 *Under construction! At the moment [Sapper](https://github.com/jssteinberg/sapper-floor-template) is used to test the implementation.*
 
-See [src/utils/](https://github.com/jssteinberg/markdown-article-template/tree/main/src/utils) for a simple Javascript implementation using the marked library and regex of both markdown and HTML strings to create the output for an API.
+See [src/utils/](https://github.com/jssteinberg/markdown-article-template/tree/main/src/utils) for a simple Javascript implementation using the marked library and regex of both markdown and HTML strings to create the output for an API. (A finer implementation should probably use remark/rehype...)
 
 Boolean and numbers are both output as strings.
 
