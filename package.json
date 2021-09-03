@@ -1,6 +1,6 @@
 {
-  "name": "pretty-readable-markdown-concept",
-  "description": "Get output of pretty and readable plain-text markdown articles",
+  "name": "readable-functional-markdown-files",
+  "description": "Get structured data from readable and pretty markdown files.",
   "version": "0.2.0",
   "scripts": {
     "dev": "sapper dev",

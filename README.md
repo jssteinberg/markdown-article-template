@@ -1,6 +1,6 @@
-# Pretty and readable plain-text markdown articles
+# Readable, Functional Markdown Files
 
-A proposal for how to format markdown articles (e.g. blog posts) so they're readable in their plain-text form **and** can output the necessary meta data without e.g. YAML front matter. This expands upon [markdown's original concept of readable plain-text files](https://daringfireball.net/projects/markdown/syntax#philosophy).
+A proposal for how to format markdown article files (e.g. blog posts) so they're readable and pretty in their plain-text form, **and** can output the necessary meta data without e.g. YAML front matter. This expands upon [markdown's original concept of readable plain-text files](https://daringfireball.net/projects/markdown/syntax#philosophy).
 
 
 ```markdown
@@ -17,7 +17,7 @@ Johan S. Steinberg
 
 Meta data is added without YAML front matter (YFM) in a more markdowny way. It's reminiscent of YFM, but simpler and it's valid markdown. It looks and feels as a more natural part of markdown.
 
-**The goal** is a markdown file-template for complete articles, including meta data, that is as readable as possible in plain-text and when it's rendered without specific HTML/CSS (for instance at Github). And with a possible (Javascript, JSON, Graphql, ...) output that is fully usable in an application of any kind.
+**The goal** is a markdown file-template for complete articles, including meta data, that is as readable and pretty as possible in plain-text, and when it's rendered without specific HTML/CSS (for instance at Github). And with a possible (Javascript, JSON, Graphql, ...) output that is fully usable in applications of any kind.
 
 
 ## Background
@@ -93,7 +93,7 @@ Several Names Separated By Comma
 An option to treat all markdown elements after the lead paragraph and before the first horizontal rule as the abstract.
 
 ```markdown
-# Title: Subtitle
+# Title
 
 A lead paragraph.
 
